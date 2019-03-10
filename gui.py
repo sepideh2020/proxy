@@ -36,12 +36,11 @@ txt.grid(column=3, row=1)
 def addGroup():
  
     fileName = txt.get()
-
-    if os.path.isfile(fileName)==True:
+    filepath=os.path.join("file_directory",fileName)
+    if os.path.isfile(filepath)==True:
         messagebox.showwarning('Warning', 'File exists')
         exit
     
-    filepath=os.path.join("file_directory",fileName)
     f = open(filepath, "a")
 
     f.close
