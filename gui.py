@@ -8,7 +8,7 @@ from os import listdir
 import subprocess as sp
 import tkinter as tk
 from math import *
-
+import glob
 window = tk.Tk()
  
 window.title("Manage Sites")
@@ -51,7 +51,7 @@ btn = Button(window, text="ADD", command=addGroup)
 btn.grid(column=4, row=6)
 
 """*********************************************************************"""
-lb= Label(window, text="open group :",font=30,background="white",justify = 'center)
+lb= Label(window, text="open group :",font=30,background="white",justify = 'center')
 
 lb.grid(column=1, row=8)
 
@@ -82,7 +82,7 @@ button.grid(column=4, row=8)
 """**************************************************************************"""
 
 
-def choose():
+"""def choose():
     # for value (1&2) just put in what you need for it
     # for example, I just put a string '101' and '102' in value1 & 2
     # the control variable cb(n)_v would hold 1 if its checked and 0 if not
@@ -108,9 +108,40 @@ for file in  os.walk("file_directory"):
         
         
 
-btn1.grid(row=2, column=0)
+btn1.grid(row=2, column=0)"""
 
+"""*************************************************************************"""
+url="www.autdmc.ir"
+def URL():
+             
+    os.chdir("file_directory")
+    cur_dir = os.getcwd()
+    print(cur_dir)
+    file_list = os.listdir(cur_dir)
+    print(file_list)
+    for file in file_list:
+        print (file)
+        with open(file, 'r') as f:
 
+         for line in f.readlines():
+            f.readline()
+            print(line)
+            print (url)
+            if  url in line:
+                print (url)
+                print("tamaaaaam")
+                break
+            else:
+                print("file does not exist")
+    
+                        
+            
+            
+        
+
+but = Button(window, text="PRINT", command=URL)
+but.grid(column=6, row=10)
+          
 window.mainloop()
 
 
