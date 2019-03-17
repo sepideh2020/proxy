@@ -1,4 +1,3 @@
 www.baidu.com
-www.autdmc.ir
-tiles.services.mozilla.com
+www.namak.ir
 

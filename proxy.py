@@ -2,25 +2,22 @@
 import os,sys,thread,socket
 
 
-BACKLOG = 2            # how many pending connections queue will hold
+BACKLOG = 1           # how many pending connections queue will hold
 MAX_DATA_RECV = 999999  # max number of bytes we receive at once
 DEBUG = True            # set to True to see the debug msgs
-BLOCKED = []            # just an example. Remove with [""] for no blocking at all.
-
-
 def main():
     global Flag
     Flag = False
 
 
-    # check the length of command running
+   
     if (len(sys.argv)<2):
-        print "No port given, using :8080 (http-alt)" 
-        port = 8080
+        print "No port given, using :8383 (http-alt)" 
+        port = 8383
     else:
         port = int(sys.argv[1]) # port from argument
 
-    # host and port info.
+    
     host = ''               # blank for localhost
 
     print "Proxy Server Running on ",host,":",port
@@ -51,17 +48,6 @@ def main():
     s.close()
 #************** END MAIN PROGRAM ***************
 
-def printout(type,request,address):
-    if "Block" in type or "Blacklist" in type:
-        colornum = 91
-    elif "Request" in type:
-        colornum = 92
-    elif "Reset" in type:
-        colornum = 93
-
-    #print "\033[",colornum,"m",address[0],"\t",type,"\t",request,"\033[0m"
-
-#*******************************************
 #********* PROXY_THREAD FUNC ***************
 # A thread to handle request from browser
 #*******************************************
@@ -92,7 +78,7 @@ def proxy_thread(conn, client_addr):
                 print (url)
                 if  url in line:
                     print (url)
-                    print("tamaaaaam")
+                    print("congragulatioooon")
                     Flag=True
                     break
                 else:
@@ -102,20 +88,6 @@ def proxy_thread(conn, client_addr):
         conn.close()
         sys.exit(1)
     
-    
-            
-    """for i in range(0,len(BLOCKED)):
-        if BLOCKED[i] in url:
-            printout("Blacklisted",first_line,client_addr)
-            conn.close()
-            sys.exit(1)"""
-
-
-         
-     
-    printout("Request",first_line,client_addr)
-    print "URL:",url
-    print
 
     # find the webserver and port
     http_pos = url.find("://")          # find pos of ://
@@ -162,9 +134,7 @@ def proxy_thread(conn, client_addr):
             s.close()
         if conn:
             conn.close()
-        printout("Peer Reset",first_line,client_addr)
         sys.exit(1)
-#********** END PROXY_THREAD ***********
 
 if __name__ == '__main__':
     main()
